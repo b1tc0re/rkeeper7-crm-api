@@ -154,9 +154,30 @@ class RegistrationLogic
         return count($response) === 0;
     }
 
-    public function getErrors()
+    /**
+     * Вывод ошибок
+     * @param string $prefix
+     * @param string $suffix
+     * @return string
+     */
+    public function error_string($prefix = '', $suffix = '')
     {
-        return $this->errorsMessage;
+        // No errors, validation passes!
+        if (count($this->errorsMessage) === 0) {
+            return '';
+        }
+
+        // Generate the error string
+        $str = '';
+        foreach ($this->errorsMessage as $val)
+        {
+            if ($val !== '')
+            {
+                $str .= $prefix.$val.$suffix."\n";
+            }
+        }
+
+        return $str;
     }
 
     /**
@@ -191,7 +212,7 @@ class RegistrationLogic
     {
         if( array_key_exists('@attributes', $response) && array_key_exists('ErrorCode', $response['@attributes']) )
         {
-            $this->errorsMessage[] =  $response['@attributes']['ErrorText'];
+            $this->errorsMessage[$response['@attributes']['ErrorCode']] =  $response['@attributes']['ErrorText'];
             return false;
         }
 
