@@ -7,7 +7,7 @@
 namespace Nutnet\RKeeper7Api\Requests;
 
 /**
- * Class GetCardInfoRequest
+ * Class RegistrationRequest
  * @package Nutnet\RKeeper7Api\Requests
  */
 class RegistrationRequest extends RequestWithParamsAbstract
